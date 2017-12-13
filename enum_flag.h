@@ -8,7 +8,7 @@
 # ifdef constexpr
 #  undef constexpr
 # endif
-# define constexpr inline // constexpr implies inline
+# define constexpr //inline // constexpr implies inline, but we can not declare a var as inline like constexpr
 #endif
 /*!
  * \brief is_flag
@@ -28,11 +28,11 @@ template<typename E, typename = if_flag<E>>
 constexpr E operator&(E e1, E e2) { return E(typename std::underlying_type<E>::type(e1) & typename std::underlying_type<E>::type(e2));}
 // assign in constexpr requires c++14 for clang/gcc, but not msvc(2013+), so the following functions are not constexpr for now. check c++ version?
 template<typename E, typename = if_flag<E>>
-E& operator|=(E& e1, E e2) { return e1 = e1 | e2;}
+constexpr E& operator|=(E& e1, E e2) { return e1 = e1 | e2;}
 template<typename E, typename = if_flag<E>>
-E& operator^=(E& e1, E e2) { return e1 = e1 ^ e2;}
+constexpr E& operator^=(E& e1, E e2) { return e1 = e1 ^ e2;}
 template<typename E, typename = if_flag<E>>
-E& operator&=(E& e1, E e2) { return e1 = e1 & e2;}
+constexpr E& operator&=(E& e1, E e2) { return e1 = e1 & e2;}
 
 // convenient functions to test whether a flag exists. REQUIRED by scoped enum
 template<typename E>

@@ -19,7 +19,7 @@ int main() {
     e0 e = e0::e00;
     e &= e0::e02;
     e |= ~e0::e01;
-    static_assert(test_flag(e0::e00 & ~e0::e01), "e0");
+    static_assert(test_flag(e0::e00 & ~e0::e01 | e0::e02), "e0");
     static_assert(e1::e10 & ~e1::e11, "e1");
 }
 
